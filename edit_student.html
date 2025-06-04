@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border: #ccc 1px solid;
+            border-radius: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit Student</h2>
+    <form id="edit-form">
+        <!-- Display the profile image -->
+        <img id="profile-img" src="" alt="Profile Image" width="100" height="100">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
+            Profile Image
+        </label>
+        <input type="file" id="image" accept="image/*">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+            Name
+        </label>
+        <input type="text" id="name" placeholder="Name" required>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="roll">
+            Roll Number
+           </label>
+        <input type="text" id="roll" placeholder="Roll" required>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="age">
+            Age
+           </label>
+        <input type="number" id="age" placeholder="Age" required>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="section">
+            Section
+           </label>
+        <input type="text" id="section" placeholder="Section" required>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="year">
+            Admission Year
+           </label>
+        <input type="text" id="year" placeholder="Year" required>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="branch">
+            Branch
+           </label>
+        <input type="text" id="branch" placeholder="Branch" required>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+            Phone Number
+           </label>
+        <input type="text" id="phone" placeholder="Phone" required>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+            Email
+           </label>
+        <input type="email" id="email" placeholder="Email" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const studentIndex = urlParams.get('index');
+        const students = JSON.parse(localStorage.getItem('students')) || [];
+
+        // Populate the form with the student's current data
+        if (studentIndex !== null) {
+            const student = students[studentIndex];
+            document.getElementById('profile-img').src = student.image || 'default-image.jpg'; // Display current image
+            document.getElementById('name').value = student.name;
+            document.getElementById('roll').value = student.roll;
+            document.getElementById('age').value = student.age;
+            document.getElementById('section').value = student.section;
+            document.getElementById('year').value = student.year;
+            document.getElementById('branch').value = student.branch;
+            document.getElementById('phone').value = student.phone;
+            document.getElementById('email').value = student.email;
+        }
+
+        // Handle the image upload and preview
+        document.getElementById('image').addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('profile-img').src = e.target.result; // Preview image
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Form submit handler
+        document.getElementById('edit-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const updatedStudent = {
+                name: document.getElementById('name').value,
+                roll: document.getElementById('roll').value,
+                age: document.getElementById('age').value,
+                section: document.getElementById('section').value,
+                year: document.getElementById('year').value,
+                branch: document.getElementById('branch').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                image: document.getElementById('profile-img').src, // Save the image URL
+            };
+
+            // Update the student in localStorage
+            students[studentIndex] = updatedStudent;
+            localStorage.setItem('students', JSON.stringify(students));
+
+            // Redirect back to the students list page
+            window.location.href = 'students.html';
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        #search {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: #cecaca;
+            font-weight: bold;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .edit-button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Student List</h2>
+    <input type="text" id="search" placeholder="Search by name, roll, or branch...">
+    <table>
+    <thead>
+        <tr>
+            <th>Profile Image</th>
+            <th>Name</th>
+            <th>Roll Number</th>
+            <th>Branch</th>
+            <th>Section</th>
+            <th>Admission Year</th>
+            <th>Age</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="student-list">
+        <!-- Student rows will be dynamically generated here -->
+    </tbody>
+</table>
+
+    <script>
+        const students = JSON.parse(localStorage.getItem('students')) || [];
+        const studentList = document.getElementById('student-list');
+        const searchInput = document.getElementById('search');
+
+        // Function to display students
+        function displayStudents(filteredStudents = students) {
+            studentList.innerHTML = ''; // Clear current list
+            filteredStudents.forEach((student, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><img src="${student.image || 'default-image.jpg'}" alt="Profile image"></td>
+                    <td>${student.name}</td>
+                    <td>${student.roll}</td>
+                    <td>${student.branch}</td>
+                    <td>${student.year}</td>
+                    <td>${student.section}</td>
+                    <td>${student.age}</td>
+                    <td>${student.phone}</td>
+                    <td>${student.email}</td>
+                    <td>
+                        <button onclick="editStudent(${index})" style="background-color: green; color: white;">Edit</button>
+                        <button onclick="deleteStudent(${index})" style="background-color: red; color: white;">Delete</button>
+                    </td>
+                `;
+                studentList.appendChild(row);
+            });
+        }
+
+        // Function to filter students based on search input
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            const filteredStudents = students.filter(student => 
+                student.name.toLowerCase().includes(query) ||
+                student.roll.toLowerCase().includes(query) ||
+                student.branch.toLowerCase().includes(query)
+            );
+            displayStudents(filteredStudents);
+        });
+
+        function editStudent(index) {
+    window.location.href = `edit_student.html?index=${index}`;
+}
+
+        // Function to delete student
+        function deleteStudent(index) {
+            if (confirm('Are you sure you want to delete this student?')) {
+                students.splice(index, 1);
+                localStorage.setItem('students', JSON.stringify(students));
+                displayStudents();
+            }
+        }
+
+        // Initial display of students
+        displayStudents();
+    </script>
+</body>
+</html>

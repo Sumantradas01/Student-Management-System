@@ -1,0 +1,314 @@
+<html>
+ <head>
+  <title>
+   Student Management System
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            float: left;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+        header .highlight, header .current a {
+            color: #77aaff;
+            font-weight: bold;
+        }
+        header a:hover {
+            color: #cccccc;
+            font-weight: bold;
+        }
+        #showcase {
+            min-height: 400px;
+            background: url('https://placehold.co/1200x400') no-repeat 0 -400px;
+            text-align: center;
+            color: #fff;
+        }
+        #showcase h1 {
+            margin-top: 100px;
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+        #showcase p {
+            font-size: 20px;
+        }
+        .button_1 {
+            height: 38px;
+            background: #77aaff;
+            border: 0;
+            padding-left: 20px;
+            padding-right: 20px;
+            color: #fff;
+        }
+        .button_1:hover {
+            background: #0056b3;
+        }
+        #main {
+            padding: 20px;
+            background: #fff;
+            margin-top: 20px;
+        }
+        .dark {
+            padding: 15px;
+            background: #333;
+            color: #fff;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .student {
+            display: flex;
+            justify-content: space-between;
+            background: #f4f4f4;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: #ccc 1px solid;
+        }
+        .student img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .student-details {
+            flex: 1;
+            margin-left: 20px;
+        }
+        .student-details h3 {
+            margin: 0;
+            padding: 0;
+        }
+        .student-details p {
+            margin: 5px 0;
+        }
+        .student-actions {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .student-actions button {
+            margin-bottom: 5px;
+        }
+        footer {
+            padding: 20px;
+            margin-top: 20px;
+            color: #fff;
+            background-color: #333;
+            text-align: center;
+        }
+  </style>
+ </head>
+ <body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>
+                    <span class="highlight">Student</span> Management System
+                </h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="current">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="students.html">Students</a> <!-- Link to students.html -->
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+  <section id="showcase">
+   <div class="container">
+    <h1>
+     <b><font color="#4c85ff">Welcome to the Student Management System</font></b>
+    </h1>
+    <p>
+     <b><font color="#ffc46e">Manage student information efficiently and effectively.</font></b>
+    </p>
+   </div>
+  </section>
+  <section class="container" id="main">
+   
+   <div id="student-list">
+   </div>
+   <h2>
+    Add New Student
+   </h2>
+   <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" id="student-form">
+    <div class="mb-4">
+     <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+      Name
+     </label>
+     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" placeholder="Student Name" type="text"/>
+    </div>
+    <div class="mb-4">
+     <label class="block text-gray-700 text-sm font-bold mb-2" for="roll">
+      Roll Number
+     </label>
+     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="roll" placeholder="Roll Number" type="text"/>
+    </div>
+    <div class="mb-4">
+     <label class="block text-gray-700 text-sm font-bold mb-2" for="age">
+      Age
+     </label>
+     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="age" placeholder="Age" type="text"/>
+    </div>
+    <div class="mb-4">
+     <label class="block text-gray-700 text-sm font-bold mb-2" for="section">
+      Section
+     </label>
+     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="section" placeholder="Section" type="text"/>
+    </div>
+    <div class="mb-4">
+     <label class="block text-gray-700 text-sm font-bold mb-2" for="year">
+      Year
+     </label>
+     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="year" placeholder="Year" type="text"/>
+    </div>
+    <div class="mb-4">
+     <label class="block text-gray-700 text-sm font-bold mb-2" for="branch">
+      Branch
+     </label>
+     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="branch" placeholder="Branch" type="text"/>
+    </div>
+    <div class="mb-4">
+     <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+      Phone Number
+     </label>
+     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" placeholder="Phone Number" type="text"/>
+    </div>
+    <div class="mb-4">
+     <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+      Email
+     </label>
+     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" placeholder="Email" type="email"/>
+    </div>
+    <div class="mb-4">
+     <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
+      Profile Image
+     </label>
+     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="image" type="file"/>
+    </div>
+    <div class="flex items-center justify-between">
+     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="add-student" type="button">
+      Add Student
+     </button>
+    </div>
+   </form>
+  </section>
+  <footer>
+   <p>
+    Student Management System © 2024
+   </p>
+  </footer>
+  <script>
+   document.getElementById('add-student').addEventListener('click', function() {
+    const name = document.getElementById('name').value;
+    const roll = document.getElementById('roll').value;
+    const age = document.getElementById('age').value;
+    const section = document.getElementById('section').value;
+    const year = document.getElementById('year').value;
+    const branch = document.getElementById('branch').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    const image = document.getElementById('image').files[0];
+
+    if (name && roll && age && section && year && branch && phone && email && image) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const studentList = document.getElementById('student-list');
+            const newStudent = {
+                name,
+                roll,
+                age,
+                section,
+                year,
+                branch,
+                phone,
+                email,
+                image: e.target.result // Save the image data URL
+            };
+
+            // Retrieve existing students from local storage
+            const students = JSON.parse(localStorage.getItem('students')) || [];
+            students.push(newStudent); // Add the new student to the array
+            localStorage.setItem('students', JSON.stringify(students)); // Save updated array to local storage
+
+            // Create student display
+            const studentDiv = document.createElement('div');
+            studentDiv.classList.add('student');
+            studentDiv.innerHTML = `
+                <img src="${e.target.result}" alt="Profile picture of ${name}" width="100" height="100">
+                <div class="student-details">
+                    <h3>${name}</h3>
+                    <p>Roll: ${roll}</p>
+                    <p>Age: ${age}</p>
+                    <p>Section: ${section}</p>
+                    <p>Year: ${year}</p>
+                    <p>Branch: ${branch}</p>
+                    <p>Phone: ${phone}</p>
+                    <p>Email: ${email}</p>
+                </div>
+                <div class="student-actions">
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="deleteStudent(this)">Delete</button>
+                </div>
+            `;
+            studentList.appendChild(studentDiv);
+
+            // Reset the form
+            document.getElementById('student-form').reset();
+        };
+        reader.readAsDataURL(image);
+    } else {
+        alert('Please fill in all fields');
+    }
+});
+  </script>
+ </body>
+</html>
